@@ -1,0 +1,26 @@
+Material
+	- StandardMaterial
+		unaffected by lights
+		- color
+	- LambertMaterial
+		color is calculated using ambient and diffuse
+		- diffuse color
+	- PhongMaterial
+		color is calculated using ambient, diffuse and specular
+		- diffuse color
+		- specular color
+	- NormalMaterial
+		- color is calcuated using the normal vectors
+
+
+What do we need to draw a mesh?
+- vertex attributes -> geometry
+- shader -> material
+- translation -> object3D
+
+How three js works:
+- The standard material just gives the mesh a color uneffected by lights
+- The lambert material uses the Lambertian model (ambient + diffuse) with the gouraud interpolation technique (per vertex)
+- The phong material uses the Phong model (ambient + diffuse + specular) with the phone interpolation technique (per pixel)
+
+So we could implement these three reflectance models and have the option to use flat, gourand or phong interpolation
