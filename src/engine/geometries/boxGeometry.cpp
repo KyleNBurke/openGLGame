@@ -1,7 +1,6 @@
 #include "boxGeometry.hpp"
 
-BoxGeometry::BoxGeometry() {
-    float vertices[] = {
+const float BoxGeometry::vertices[] = {
 		-0.5f, -0.5f, -0.5f,
          0.5f, -0.5f, -0.5f,
          0.5f,  0.5f, -0.5f,
@@ -45,5 +44,4 @@ BoxGeometry::BoxGeometry() {
         -0.5f,  0.5f, -0.5f,
 	};
 
-	init(vertices, sizeof(vertices), sizeof(vertices) / 3);
-}
+BoxGeometry::BoxGeometry() : Geometry(vertices, sizeof(vertices), sizeof(vertices) / 3) {}

@@ -1,8 +1,6 @@
 #include "geometry.hpp"
 
-Geometry::Geometry() {}
-
-void Geometry::init(float vertices[], int verticesSize, int vertexCount) {
+Geometry::Geometry(const float vertices[], std::size_t verticesSize, std::size_t vertexCount) {
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, verticesSize, vertices, GL_STATIC_DRAW);
@@ -13,4 +11,16 @@ void Geometry::init(float vertices[], int verticesSize, int vertexCount) {
 	glEnableVertexAttribArray(0);
 
 	this->vertexCount = vertexCount;
+}
+
+GLuint Geometry::getVbo() const {
+	return vbo;
+}
+
+GLuint Geometry::getVao() const {
+	return vao;
+}
+
+int Geometry::getVertexCount() const {
+	return vertexCount;
 }

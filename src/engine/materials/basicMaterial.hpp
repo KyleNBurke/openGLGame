@@ -10,5 +10,5 @@ class BasicMaterial : public Material {
 		Shader& getShader();
 		static Shader shader;
 		glm::vec4 color;
-		GLint transformLoc;
+		GLint transformLoc; //should not be able to be set outside this class
 };
