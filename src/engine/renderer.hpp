@@ -7,5 +7,5 @@
 class Renderer {
 	public:
 		Renderer();
-		void render(GLFWwindow* window, Scene scene, Camera camera); //prob just need refs
+		void render(GLFWwindow* window, Scene& scene, Camera& camera);
 };

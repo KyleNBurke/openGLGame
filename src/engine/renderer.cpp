@@ -14,7 +14,7 @@ Renderer::Renderer() {
 	glClearColor(0.3921f, 0.5843f, 0.9294f, 1.0f);
 }
 
-void Renderer::render(GLFWwindow* window, Scene scene, Camera camera) {
+void Renderer::render(GLFWwindow* window, Scene& scene, Camera& camera) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	std::vector<Object3D*>& objects = scene.objects;
