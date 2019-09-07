@@ -36,8 +36,9 @@ int main() {
 
 	BoxGeometry geo;
 	BasicMaterial mat;
-	Mesh cube(geo, mat);
-	scene.objects.push_back(&cube);
+	auto cubePtr = std::make_unique<Mesh>(geo, mat);
+	Mesh& cube = *cubePtr;
+	scene.objects.push_back(std::move(cubePtr));
 
 	cube.transform = glm::translate(cube.transform, glm::vec3(0.5f, 0.0f, -3.0f));
 
