@@ -21,6 +21,15 @@ int main() {
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
+	int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+	if (!gladStatus) {
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+
+	glClearColor(0.3921f, 0.5843f, 0.9294f, 1.0f);
+
 	Renderer renderer;
 	Scene scene;
 	Camera camera(800.0f / 600.0f);

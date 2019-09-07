@@ -2,17 +2,7 @@
 #include <iostream>
 #include "mesh.hpp"
 
-Renderer::Renderer() {
-	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-	if (!status) {
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		glfwTerminate();
-		return;
-	}
-
-	glClearColor(0.3921f, 0.5843f, 0.9294f, 1.0f);
-}
+Renderer::Renderer() {}
 
 void Renderer::render(GLFWwindow* window, Scene& scene, Camera& camera) {
 	glClear(GL_COLOR_BUFFER_BIT);
