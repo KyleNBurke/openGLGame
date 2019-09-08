@@ -2,13 +2,17 @@
 
 #include "material.hpp"
 #include "glm/vec4.hpp"
-#include "../shaders/shader.hpp"
 
 class BasicMaterial : public Material {
 	public:
 		BasicMaterial();
-		Shader& getShader();
-		static Shader shader;
+		GLuint getProgram() const;
+		GLint getTransformLoc() const;
+		
 		glm::vec4 color;
-		GLint transformLoc; //should not be able to be set outside this class
+
+	private:
+		static bool initialized;
+		static GLuint program;
+		static GLint transformLoc;
 };

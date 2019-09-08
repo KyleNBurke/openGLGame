@@ -1,12 +1,15 @@
 #pragma once
 
-#include "../shaders/shader.hpp"
+#include <glad/glad.h>
+#include <string>
 
 class Material {
 	public:
 		Material();
-		virtual Shader& getShader() = 0;
-	
+		virtual GLuint getProgram() const = 0;
+		virtual GLint getTransformLoc() const = 0;
+
 	protected:
-		static bool shaderInitialized;
+		void init(std::string baseFileName, GLuint& program, GLint& transformLoc);
+		void load(std::string fileName, GLuint shader);
 };
