@@ -10,7 +10,7 @@ void Renderer::render(GLFWwindow* window, Scene& scene, Camera& camera) {
 	for (auto& it : scene.objects) {
 		Mesh* meshObj = dynamic_cast<Mesh*>(it.get());
 		if (meshObj != nullptr) {
-			meshObj->render(camera.proj);
+			meshObj->render(camera.transform, camera.proj);
 		}
 	}
 
