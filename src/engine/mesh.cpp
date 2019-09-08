@@ -12,7 +12,7 @@ void Mesh::render(glm::mat4& view, glm::mat4& proj) {
 	//...
 
 	//pass matrix to shader
-	glUniformMatrix4fv(material.getTransformLoc(), 1, GL_FALSE, glm::value_ptr(proj * view * transform));
+	glUniformMatrix4fv(material.getTransformLoc(), 1, GL_FALSE, glm::value_ptr(proj * glm::inverse(view) * transform));
 
 	glBindVertexArray(geometry.getVao());
 	glDrawArrays(GL_TRIANGLES, 0, geometry.getVertexCount());

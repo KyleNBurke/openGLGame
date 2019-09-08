@@ -2,8 +2,9 @@
 #include <glfw/glfw3.h>
 #include "../engine/renderer.hpp"
 #include "../engine/geometries/boxGeometry.hpp"
-#include "../engine/materials/basicMaterial.hpp"
 #include "../engine/mesh.hpp"
+#include "../engine/materials/basicMaterial.hpp"
+#include "../engine/materials/lambertMaterial.hpp"
 
 #include <iostream>
 
@@ -33,19 +34,28 @@ int main() {
 	Renderer renderer;
 	Scene scene;
 	Camera camera(800.0f / 600.0f);
+	camera.transform = glm::translate(camera.transform, glm::vec3(1.0f, 0.0f, 2.0f));
+	camera.transform = glm::rotate(camera.transform, 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
+	camera.transform = glm::translate(camera.transform, glm::vec3(0.4f, 0.0f, 0.0f));
 
-	BoxGeometry geo;
-	BasicMaterial mat;
-	auto cubePtr = std::make_unique<Mesh>(geo, mat);
-	Mesh& cube = *cubePtr;
-	scene.objects.push_back(std::move(cubePtr));
+	BoxGeometry geoB;
+	BasicMaterial matB;
+	auto cubePtrB = std::make_unique<Mesh>(geoB, matB);
+	Mesh& cubeB = *cubePtrB;
+	scene.objects.push_back(std::move(cubePtrB));
 
-	cube.transform = glm::translate(cube.transform, glm::vec3(0.5f, 0.0f, -3.0f));
+	BoxGeometry geoL;
+	LambertMaterial matL;
+	auto cubePtrL = std::make_unique<Mesh>(geoL, matL);
+	Mesh& cubeL = *cubePtrL;
+	scene.objects.push_back(std::move(cubePtrL));
+
+	cubeB.transform = glm::translate(cubeB.transform, glm::vec3(0.5f, 0.0f, -3.0f));
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
 
-		cube.transform = glm::rotate(cube.transform, (float)glfwGetTime() * 0.005f, glm::vec3(0.0f, 1.0f, 1.0f));
+		cubeB.transform = glm::rotate(cubeB.transform, (float)glfwGetTime() * 0.005f, glm::vec3(0.0f, 1.0f, 1.0f));
 		renderer.render(window, scene, camera);
 	}
 
