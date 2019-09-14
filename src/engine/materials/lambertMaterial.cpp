@@ -9,14 +9,19 @@ LambertMaterial::LambertMaterial() :
 {
 	if (!initialized) {
 		init("lambert", program, transformLoc);
+		lambertInit();
 		initialized = true;
 	}
 }
 
-GLuint LambertMaterial::getProgram() const {
-	return LambertMaterial::program;
+void LambertMaterial::lambertInit() {
+
 }
 
-GLint LambertMaterial::getTransformLoc() const {
-	return LambertMaterial::transformLoc;
+void LambertMaterial::sendData(const glm::mat4& trans) {
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+}
+
+GLuint LambertMaterial::getProgram() const {
+	return LambertMaterial::program;
 }

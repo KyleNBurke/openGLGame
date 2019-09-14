@@ -7,7 +7,6 @@ class Material {
 	public:
 		Material();
 		virtual GLuint getProgram() const = 0;
-		virtual GLint getTransformLoc() const = 0;
 
 	protected:
 		void init(std::string baseFileName, GLuint& program, GLint& transformLoc);
