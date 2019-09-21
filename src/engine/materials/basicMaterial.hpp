@@ -15,6 +15,6 @@ class BasicMaterial : public Material {
 		static bool initialized;
 		static GLuint program;
 		static GLint transformLoc;
-		GLint colorLoc;
+		static GLint colorLoc;
 		glm::vec3 color;
 };

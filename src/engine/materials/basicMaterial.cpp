@@ -3,6 +3,7 @@
 bool BasicMaterial::initialized = false;
 GLuint BasicMaterial::program = 0;
 GLint BasicMaterial::transformLoc = 0;
+GLint BasicMaterial::colorLoc = 0;
 
 BasicMaterial::BasicMaterial(glm::vec3 color) : color(color) {
 	if (!initialized) {

@@ -39,7 +39,7 @@ int main() {
 	camera.transform = glm::translate(camera.transform, glm::vec3(0.4f, 0.0f, 0.0f));
 
 	BoxGeometry geoB;
-	BasicMaterial matB;
+	BasicMaterial matB(glm::vec3(1.0, 0.0f, 0.0f));
 	auto cubePtrB = std::make_unique<Mesh>(geoB, matB);
 	Mesh& cubeB = *cubePtrB;
 	scene.objects.push_back(std::move(cubePtrB));
