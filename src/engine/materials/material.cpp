@@ -26,7 +26,7 @@ void Material::init(std::string baseFileName, GLuint& program, GLint& transformL
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
 		char* error = new char[length];
 		glGetProgramInfoLog(program, length, &length, error);
-		std::cout << "shader link error:" << std::endl << error << std::endl;
+		std::cout << "shader link error:" << std::endl << error;
 		delete[] error;
 	}
 
@@ -56,7 +56,7 @@ void Material::load(std::string fileName, GLuint shader) {
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
 		char* error = new char[length];
 		glGetShaderInfoLog(shader, length, &length, error);
-		std::cout << "shader compile error:" << std::endl << error << std::endl;
+		std::cout << "shader compile error:" << std::endl << error;
 		delete[] error;
 	}
 }

@@ -3,9 +3,11 @@
 bool LambertMaterial::initialized = false;
 GLuint LambertMaterial::program = 0;
 GLint LambertMaterial::transformLoc = 0;
+GLint LambertMaterial::materialColorLoc = 0;
+GLint LambertMaterial::ambientLightLoc = 0;
 
-LambertMaterial::LambertMaterial() :
-	color(glm::vec4())
+LambertMaterial::LambertMaterial(glm::vec3 color) :
+	color(color)
 {
 	if (!initialized) {
 		init("lambert", program, transformLoc);
@@ -15,24 +17,14 @@ LambertMaterial::LambertMaterial() :
 }
 
 void LambertMaterial::lambertInit() {
-	GLuint pointLightBlock;
-	glGenBuffers(1, &pointLightBlock);
-	glBindBuffer(GL_UNIFORM_BUFFER, pointLightBlock);
-	glBufferData(GL_UNIFORM_BUFFER, 16, NULL, GL_STATIC_DRAW);
-	glBindBufferBase(GL_UNIFORM_BUFFER, 1, pointLightBlock);
-
-	/*glm::vec4 data[2];
-	data[0] = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
-	data[1] = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
-	int i = sizeof(data);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, 16, glm::value_ptr(data[0]));
-	glBufferSubData(GL_UNIFORM_BUFFER, 16, 32, glm::value_ptr(data[1]));*/
-	glm::vec4 data(0.0f, 0.0f, 1.0f, 1.0f);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, 16, glm::value_ptr(data));
+	materialColorLoc = glGetUniformLocation(program, "materialColor");
+	ambientLightLoc = glGetUniformLocation(program, "ambientLight");
 }
 
-void LambertMaterial::sendData(const glm::mat4& trans) {
+void LambertMaterial::sendData(const glm::mat4& trans, const glm::vec3& ambientLight) {
 	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+	glUniform3fv(materialColorLoc, 1, glm::value_ptr(color));
+	glUniform3fv(ambientLightLoc, 1, glm::value_ptr(ambientLight));
 }
 
 GLuint LambertMaterial::getProgram() const {

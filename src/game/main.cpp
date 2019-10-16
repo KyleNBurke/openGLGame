@@ -5,20 +5,21 @@
 #include "../engine/mesh.hpp"
 #include "../engine/materials/basicMaterial.hpp"
 #include "../engine/materials/lambertMaterial.hpp"
+#include "../engine/lights/pointLight.hpp"
 
 #include <iostream>
 
 int main() {
 	glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
 	if (window == NULL) {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
@@ -30,6 +31,7 @@ int main() {
 	}
 
 	glClearColor(0.3921f, 0.5843f, 0.9294f, 1.0f);
+	glEnable(GL_DEPTH_TEST);
 
 	Renderer renderer;
 	Scene scene;
@@ -39,7 +41,7 @@ int main() {
 	camera.transform = glm::translate(camera.transform, glm::vec3(0.4f, 0.0f, 0.0f));
 
 	BoxGeometry geoB;
-	BasicMaterial matB(glm::vec3(1.0, 0.0f, 0.0f));
+	BasicMaterial matB(glm::vec3(1.0f, 0.0f, 0.0f));
 	auto cubePtrB = std::make_unique<Mesh>(geoB, matB);
 	Mesh& cubeB = *cubePtrB;
 	scene.objects.push_back(std::move(cubePtrB));
@@ -49,6 +51,8 @@ int main() {
 	auto cubePtrL = std::make_unique<Mesh>(geoL, matL);
 	Mesh& cubeL = *cubePtrL;
 	scene.objects.push_back(std::move(cubePtrL));
+
+	PointLight pointLight;
 
 	cubeB.transform = glm::translate(cubeB.transform, glm::vec3(0.5f, 0.0f, -3.0f));
 
@@ -60,5 +64,5 @@ int main() {
 	}
 
 	glfwTerminate();
-    return 0;
+	return 0;
 }

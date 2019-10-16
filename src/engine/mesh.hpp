@@ -7,7 +7,7 @@
 class Mesh : public Object3D {
 	public:
 		Mesh(Geometry& geometry, Material& material);
-		void render(glm::mat4& view, glm::mat4& proj);
+		void render(const glm::mat4& view, const glm::mat4& proj, const glm::vec3& ambientLight);
 
 		Geometry& geometry;
 		Material& material;
