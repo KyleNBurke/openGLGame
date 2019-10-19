@@ -5,6 +5,8 @@
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNorm;
 uniform mat4 transform;
+uniform mat4 modelMatrix;
+uniform mat3 normalMatrix;
 uniform vec3 materialColor;
 uniform vec3 ambientLight;
 out vec3 color;
@@ -23,13 +25,14 @@ vec3 calcPointLightColor(PointLight light, vec3 vertPos, vec3 normal);
 
 void main() {
 	gl_Position = transform * vec4(aPos, 1.0f);
-	//color = pointLights.lights[0].color;
 
 	color = ambientLight;
 	int temp = 1;
 
 	for (int i = 0; i < temp; i++) {
-		color += calcPointLightColor(pointLights.lights[i], aPos, aNorm);
+		vec3 transformedVertPos = normalize(vec3(modelMatrix * vec4(aPos, 1.0f)));
+		vec3 transformedNorm = normalize(normalMatrix * aNorm);
+		color += calcPointLightColor(pointLights.lights[i], transformedVertPos, transformedNorm);
 	}
 }
 

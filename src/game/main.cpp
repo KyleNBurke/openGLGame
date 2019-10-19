@@ -59,7 +59,9 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
 
-		cubeB.transform = glm::rotate(cubeB.transform, (float)glfwGetTime() * 0.005f, glm::vec3(0.0f, 1.0f, 1.0f));
+		cubeB.transform = glm::rotate(cubeB.transform, 0.01f, glm::vec3(0.0f, 1.0f, 1.0f));
+		cubeL.transform = glm::rotate(cubeL.transform, 0.005f, glm::vec3(0.0, 1.0f, 0.0f));
+
 		renderer.render(window, scene, camera);
 	}
 
