@@ -7,6 +7,7 @@
 #include "../engine/materials/lambertMaterial.hpp"
 #include "../engine/lights/pointLight.hpp"
 #include "../engine/helpers/pointLightHelper.hpp"
+#include "cameraControls.hpp"
 
 #include <iostream>
 
@@ -23,6 +24,7 @@ int main() {
 	}
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	int gladStatus = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	if (!gladStatus) {
@@ -37,9 +39,11 @@ int main() {
 	Renderer renderer;
 	Scene scene;
 	Camera camera(800.0f / 600.0f);
-	camera.transform = glm::translate(camera.transform, glm::vec3(1.0f, 0.0f, 2.0f));
-	camera.transform = glm::rotate(camera.transform, 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
-	camera.transform = glm::translate(camera.transform, glm::vec3(0.4f, 0.0f, 0.0f));
+
+	double mousePosX;
+	double mousePosY;
+	glfwGetCursorPos(window, &mousePosX, &mousePosY);
+	CameraControls cameraControls(mousePosX, mousePosY);
 
 	BoxGeometry geoB;
 	BasicMaterial matB(glm::vec3(1.0f, 0.0f, 0.0f));
@@ -63,6 +67,11 @@ int main() {
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
+
+		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, 1);
+
+		cameraControls.update(window, camera);
 
 		cubeB.transform = glm::rotate(cubeB.transform, 0.01f, glm::vec3(0.0f, 1.0f, 1.0f));
 		cubeL.transform = glm::rotate(cubeL.transform, 0.005f, glm::vec3(0.0, 1.0f, 0.0f));
