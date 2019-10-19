@@ -6,6 +6,7 @@
 #include "../engine/materials/basicMaterial.hpp"
 #include "../engine/materials/lambertMaterial.hpp"
 #include "../engine/lights/pointLight.hpp"
+#include "../engine/helpers/pointLightHelper.hpp"
 
 #include <iostream>
 
@@ -53,6 +54,10 @@ int main() {
 	scene.objects.push_back(std::move(cubePtrL));
 
 	PointLight pointLight;
+	pointLight.transform = glm::translate(pointLight.transform, glm::vec3(1.0f, 1.0f, -2.0f));
+
+	auto pointLightHelper = std::make_unique<PointLightHelper>(pointLight);
+	scene.objects.push_back(std::move(pointLightHelper));
 
 	cubeB.transform = glm::translate(cubeB.transform, glm::vec3(0.5f, 0.0f, -3.0f));
 
