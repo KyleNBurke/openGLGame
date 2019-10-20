@@ -27,9 +27,8 @@ void main() {
 	gl_Position = transform * vec4(aPos, 1.0f);
 
 	color = ambientLight;
-	int temp = 1;
 
-	for (int i = 0; i < temp; i++) {
+	for (int i = 0; i < pointLights.count; i++) {
 		vec3 transformedVertPos = normalize(vec3(modelMatrix * vec4(aPos, 1.0f)));
 		vec3 transformedNorm = normalize(normalMatrix * aNorm);
 		color += calcPointLightColor(pointLights.lights[i], transformedVertPos, transformedNorm);

@@ -49,19 +49,30 @@ int main() {
 	BasicMaterial matB(glm::vec3(1.0f, 0.0f, 0.0f));
 	auto cubePtrB = std::make_unique<Mesh>(geoB, matB);
 	Mesh& cubeB = *cubePtrB;
-	scene.objects.push_back(std::move(cubePtrB));
+	scene.meshes.push_back(std::move(cubePtrB));
 
 	BoxGeometry geoL;
 	LambertMaterial matL;
 	auto cubePtrL = std::make_unique<Mesh>(geoL, matL);
 	Mesh& cubeL = *cubePtrL;
-	scene.objects.push_back(std::move(cubePtrL));
+	cubeL.transform = glm::translate(cubeL.transform, glm::vec3(-1.0f, 0.0f, 0.0f));
+	scene.meshes.push_back(std::move(cubePtrL));
 
-	PointLight pointLight;
+	auto pointLightPtr = std::make_unique<PointLight>();
+	PointLight& pointLight = *pointLightPtr;
+	scene.addPointLight(std::move(pointLightPtr));
 	pointLight.transform = glm::translate(pointLight.transform, glm::vec3(1.0f, 1.0f, -2.0f));
 
 	auto pointLightHelper = std::make_unique<PointLightHelper>(pointLight);
-	scene.objects.push_back(std::move(pointLightHelper));
+	scene.meshes.push_back(std::move(pointLightHelper));
+
+	/*auto pointLightPtr2 = std::make_unique<PointLight>();
+	PointLight& pointLight2 = *pointLightPtr2;
+	scene.addPointLight(std::move(pointLightPtr2));
+	pointLight2.transform = glm::translate(pointLight2.transform, glm::vec3(-1.0f, 1.0f, 2.0f));
+
+	auto pointLightHelper2 = std::make_unique<PointLightHelper>(pointLight2);
+	scene.meshes.push_back(std::move(pointLightHelper2));*/
 
 	cubeB.transform = glm::translate(cubeB.transform, glm::vec3(0.5f, 0.0f, -3.0f));
 
