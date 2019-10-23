@@ -55,13 +55,13 @@ int main() {
 	LambertMaterial matL;
 	auto cubePtrL = std::make_unique<Mesh>(geoL, matL);
 	Mesh& cubeL = *cubePtrL;
-	cubeL.transform = glm::translate(cubeL.transform, glm::vec3(-1.0f, 0.0f, 0.0f));
+	cubeL.setMatrix(glm::translate(cubeL.getMatrix(), glm::vec3(-1.0f, 0.0f, 0.0f)));
 	scene.meshes.push_back(std::move(cubePtrL));
 
 	auto pointLightPtr = std::make_unique<PointLight>();
 	PointLight& pointLight = *pointLightPtr;
 	scene.addPointLight(std::move(pointLightPtr));
-	pointLight.transform = glm::translate(pointLight.transform, glm::vec3(1.0f, 1.0f, -2.0f));
+	pointLight.setMatrix(glm::translate(pointLight.getMatrix(), glm::vec3(1.0f, 1.0f, -2.0f)));
 
 	auto pointLightHelper = std::make_unique<PointLightHelper>(pointLight);
 	scene.meshes.push_back(std::move(pointLightHelper));
@@ -74,7 +74,7 @@ int main() {
 	auto pointLightHelper2 = std::make_unique<PointLightHelper>(pointLight2);
 	scene.meshes.push_back(std::move(pointLightHelper2));*/
 
-	cubeB.transform = glm::translate(cubeB.transform, glm::vec3(0.5f, 0.0f, -3.0f));
+	cubeB.setMatrix(glm::translate(cubeB.getMatrix(), glm::vec3(0.5f, 0.0f, -3.0f)));
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -84,8 +84,8 @@ int main() {
 
 		cameraControls.update(window, camera);
 
-		cubeB.transform = glm::rotate(cubeB.transform, 0.01f, glm::vec3(0.0f, 1.0f, 1.0f));
-		cubeL.transform = glm::rotate(cubeL.transform, 0.005f, glm::vec3(0.0, 1.0f, 0.0f));
+		cubeB.setMatrix(glm::rotate(cubeB.getMatrix(), 0.01f, glm::vec3(0.0f, 1.0f, 1.0f)));
+		cubeL.setMatrix(glm::rotate(cubeL.getMatrix(), 0.005f, glm::vec3(0.0, 1.0f, 0.0f)));
 
 		renderer.render(window, scene, camera);
 	}

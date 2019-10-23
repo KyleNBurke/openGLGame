@@ -8,6 +8,7 @@
 class PointLightHelper : public Mesh {
 	public:
 		PointLightHelper(const PointLight& pointLight);
+		void updateMatrix() override;
 
 		BoxGeometry boxGeometry;
 		BasicMaterial basicMaterial;

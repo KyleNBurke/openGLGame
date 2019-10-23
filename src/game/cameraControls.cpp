@@ -50,5 +50,5 @@ void CameraControls::update(GLFWwindow* window, Camera& camera) {
 	glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
 	up = glm::normalize(glm::cross(right, forward));
 	
-	camera.transform = glm::lookAt(camera.position, camera.position + forward, up);
+	camera.setMatrix(glm::lookAt(camera.position, camera.position + forward, up));
 }

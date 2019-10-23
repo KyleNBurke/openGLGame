@@ -6,3 +6,7 @@ PointLightHelper::PointLightHelper(const PointLight& pointLight) :
 	basicMaterial(), //need?
 	Mesh(boxGeometry, basicMaterial)
 {}
+
+void PointLightHelper::updateMatrix() {
+	matrix = pointLight.getMatrix();
+}

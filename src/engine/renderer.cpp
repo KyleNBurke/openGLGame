@@ -16,7 +16,7 @@ void Renderer::render(GLFWwindow* window, Scene& scene, Camera& camera) {
 	PointLight::updateLightCount(i);
 
 	for (std::unique_ptr<Mesh>& mesh : scene.meshes) {
-		mesh->render(camera.transform, camera.proj, scene.ambientLight);
+		mesh->render(camera.getMatrix(), camera.proj, scene.ambientLight);
 	}
 
 	glfwSwapBuffers(window);
