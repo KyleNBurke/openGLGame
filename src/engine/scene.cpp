@@ -1,7 +1,9 @@
 #include "scene.hpp"
 #include <iostream>
 
-Scene::Scene(glm::vec3 ambientLight) :
+Scene::Scene() {}
+
+Scene::Scene(Vector3 ambientLight) :
 	ambientLight(ambientLight)
 {}
 

@@ -26,10 +26,10 @@ Matrix4& Matrix4::compose(const Vector3& position, const Quaternion& quaternion,
 	float qx = quaternion.x, qy = quaternion.y, qz = quaternion.z, qw = quaternion.w;
 	float sx = scale.x, sy = scale.y, sz = scale.z;
 
-	float& t11 = te[0], t12 = te[4], t13 = te[8], t14 = te[12];
-	float& t21 = te[1], t22 = te[5], t23 = te[9], t24 = te[13];
-	float& t31 = te[2], t32 = te[6], t33 = te[10], t34 = te[14];
-	float& t41 = te[3], t42 = te[7], t43 = te[11], t44 = te[15];
+	float &t11 = te[0], &t12 = te[4], &t13 = te[8], &t14 = te[12];
+	float &t21 = te[1], &t22 = te[5], &t23 = te[9], &t24 = te[13];
+	float &t31 = te[2], &t32 = te[6], &t33 = te[10], &t34 = te[14];
+	float &t41 = te[3], &t42 = te[7], &t43 = te[11], &t44 = te[15];
 
 	t11 = (1 - 2 * (qy * qy + qz * qz)) * sx;
 	t21 = 2 * (qx * qy + qw * qz) * sx;
@@ -69,6 +69,25 @@ Matrix4& Matrix4::transpose() {
 	return *this;
 }
 
+Matrix4& Matrix4::makePerspective(float left, float right, float top, float bottom, float near, float far) {
+	float (&te)[16] = elements;
+
+	float x = 2 * near / (right - left);
+	float y = 2 * near / (top - bottom);
+
+	float a = (right + left) / (right - left);
+	float b = (top + bottom) / (top - bottom);
+	float c = -(far + near) / (far - near);
+	float d = -2 * far * near / (far - near);
+
+	te[0] = x; te[4] = 0; te[8] = a; te[12] = 0;
+	te[1] = 0; te[5] = y; te[9] = b; te[13] = 0;
+	te[2] = 0; te[6] = 0; te[10] = c; te[14] = d;
+	te[3] = 0; te[7] = 0; te[11] = -1; te[15] = 0;
+
+	return *this;
+}
+
 Matrix4 Matrix4::operator*(const Matrix4& b) const {
 	Matrix4 r;
 	const float (&ae)[16] = elements;
@@ -85,10 +104,10 @@ Matrix4 Matrix4::operator*(const Matrix4& b) const {
 	float b31 = be[2], b32 = be[6], b33 = be[10], b34 = be[14];
 	float b41 = be[3], b42 = be[7], b43 = be[11], b44 = be[15];
 
-	float& r11 = re[0], r12 = re[4], r13 = re[8], r14 = re[12];
-	float& r21 = re[1], r22 = re[5], r23 = re[9], r24 = re[13];
-	float& r31 = re[2], r32 = re[6], r33 = re[10], r34 = re[14];
-	float& r41 = re[3], r42 = re[7], r43 = re[11], r44 = re[15];
+	float &r11 = re[0], &r12 = re[4], &r13 = re[8], &r14 = re[12];
+	float &r21 = re[1], &r22 = re[5], &r23 = re[9], &r24 = re[13];
+	float &r31 = re[2], &r32 = re[6], &r33 = re[10], &r34 = re[14];
+	float &r41 = re[3], &r42 = re[7], &r43 = re[11], &r44 = re[15];
 
 	r11 = a11 * b11 + a12 * b21 + a13 * b31 + a14 * b41;
 	r12 = a11 * b12 + a12 * b22 + a13 * b32 + a14 * b42;

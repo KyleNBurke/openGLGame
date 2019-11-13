@@ -1,7 +1,8 @@
 #pragma once
-#include <glm/vec3.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/mat4x4.hpp>
+
+#include "math/vector3.hpp"
+#include "math/quaternion.hpp"
+#include "math/matrix4.hpp"
 
 class Object3D {
 	public:
@@ -9,14 +10,18 @@ class Object3D {
 		virtual ~Object3D() {};
 
 		virtual void updateMatrix();
-		void setMatrix(glm::mat4 matrix);
-		const glm::mat4& getMatrix() const;
+		void setMatrix(Matrix4 matrix);
+		const Matrix4& getMatrix() const;
+		void translateOnAxis(const Vector3& axis, float distance);
+		void translateX(float distance);
+		void translateY(float distance);
+		void translateZ(float distance);
 
 		bool autoUpdateMatrix;
-		glm::vec3 position;
-		glm::quat rotation;
-		glm::vec3 scale;
+		Vector3 position;
+		Quaternion quaternion;
+		Vector3 scale;
 	
 	protected:
-		glm::mat4 matrix;
+		Matrix4 matrix;
 };

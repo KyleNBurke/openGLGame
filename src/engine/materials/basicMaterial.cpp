@@ -17,8 +17,8 @@ void BasicMaterial::basicInit() {
 	colorLoc = glGetUniformLocation(program, "color");
 }
 
-void BasicMaterial::sendData(const glm::mat4& trans) {
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+void BasicMaterial::sendData(const Matrix4& trans) {
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, trans.getElements());
 	glUniform3fv(colorLoc, 1, glm::value_ptr(color));
 }
 
