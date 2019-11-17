@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := game.exe
-incDir = -I C:/Dependencies/OpenGL-MinGW/include
-libDir = -L C:/Dependencies/OpenGL-MinGW/lib
+incDir = -I C:/Users/kylen/Development/dependencies/openGL/include
+libDir = -L C:/Users/kylen/Development/dependencies/openGL/lib
 libFiles = -l glfw3 -l gdi32 -l opengl32
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2)$(filter $(subst *,%,$2),$d))
 src = $(call rwildcard,src/,*.cpp *.c)
