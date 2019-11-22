@@ -11,7 +11,9 @@ class Matrix4 {
 		Matrix4& identity();
 		Matrix4& compose(const Vector3& position, const Quaternion& quaternion, const Vector3& scale);
 		Matrix4& transpose();
+		Matrix4& invert();
 		Matrix4& makePerspective(float left, float right, float top, float bottom, float near, float far);
+		
 		Matrix4 operator*(const Matrix4& b) const;
 		Matrix4& operator*=(float s);
 

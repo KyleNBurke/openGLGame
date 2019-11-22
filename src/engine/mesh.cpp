@@ -18,8 +18,7 @@ void Mesh::render(const Matrix4& view, const Matrix4& proj, const Vector3& ambie
 	//this can be done much more efficient using an enum to get the material type and a switch case (translation matrix should use a UBO)
 	BasicMaterial* basic = dynamic_cast<BasicMaterial*>(&material);
 	if (basic != nullptr) {
-		Matrix4 m = proj * view * matrix;
-		basic->sendData(m);
+		basic->sendData(proj * view * matrix);
 	}
 	/*LambertMaterial* lambert = dynamic_cast<LambertMaterial*>(&material);
 	if (lambert != nullptr) {

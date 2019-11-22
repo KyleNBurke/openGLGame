@@ -1,6 +1,6 @@
 #include "renderer.hpp"
-#include <iostream>
 #include "mesh.hpp"
+#include "math/matrix4.hpp"
 
 Renderer::Renderer() {}
 
@@ -15,8 +15,11 @@ void Renderer::render(GLFWwindow* window, Scene& scene, Camera& camera) {
 
 	PointLight::updateLightCount(i);
 
+	camera.updateMatrix();
+
 	for (std::unique_ptr<Mesh>& mesh : scene.meshes) {
-		mesh->render(camera.getMatrix(), camera.proj, scene.ambientLight);
+		Matrix4 view = Matrix4(camera.getMatrix()).invert();
+		mesh->render(view, camera.proj, scene.ambientLight);
 	}
 
 	glfwSwapBuffers(window);

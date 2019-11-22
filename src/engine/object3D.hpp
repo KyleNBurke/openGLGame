@@ -16,6 +16,11 @@ class Object3D {
 		void translateX(float distance);
 		void translateY(float distance);
 		void translateZ(float distance);
+		void rotateOnAxis(const Vector3& axis, float angle);
+		void rotateOnWorldAxis(const Vector3& axis, float angle);
+		void rotateX(float angle);
+		void rotateY(float angle);
+		void rotateZ(float angle);
 
 		bool autoUpdateMatrix;
 		Vector3 position;

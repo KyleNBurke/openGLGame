@@ -4,12 +4,12 @@
 
 class Camera : public Object3D {
 	public:
-		Camera(float aspect, float near, float far, float fov);
+		Camera(float aspect, float fov, float near, float far);
 		void updateProjectionMatrix();
 
 		float aspect;
-		float nearPlane;
-		float farPlane;
 		float fov;
+		float nearDist;
+		float farDist;
 		Matrix4 proj;
 };

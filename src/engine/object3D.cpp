@@ -1,5 +1,7 @@
 #include "object3D.hpp"
 
+#include <iostream>
+
 Object3D::Object3D() :
 	autoUpdateMatrix(true),
 	scale(1, 1, 1)
@@ -22,7 +24,7 @@ const Matrix4& Object3D::getMatrix() const {
 }
 
 void Object3D::translateOnAxis(const Vector3& axis, float distance) {
-	Vector3 axisObjectSpace = Vector3(axis);//.applyQuaternion(quaternion);
+	Vector3 axisObjectSpace = Vector3(axis).applyQuaternion(quaternion);
 	position += axisObjectSpace * distance;
 }
 
@@ -36,4 +38,21 @@ void Object3D::translateY(float distance) {
 
 void Object3D::translateZ(float distance) {
 	translateOnAxis(Vector3(0, 0, 1), distance);
+}
+
+void Object3D::rotateOnAxis(const Vector3& axis, float angle) {
+	Quaternion axisObjectSpace(axis, angle);
+	quaternion *= axisObjectSpace;
+}
+
+void Object3D::rotateX(float angle) {
+	rotateOnAxis(Vector3(1, 0, 0), angle);
+}
+
+void Object3D::rotateY(float angle) {
+	rotateOnAxis(Vector3(0, 1, 0), angle);
+}
+
+void Object3D::rotateZ(float angle) {
+	rotateOnAxis(Vector3(0, 0, 1), angle);
 }

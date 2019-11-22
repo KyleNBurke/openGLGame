@@ -8,6 +8,9 @@
 #include "../engine/geometries/boxGeometry.hpp"
 #include "../engine/materials/basicMaterial.hpp"
 
+#include "cameraControls.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+
 int main() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -35,13 +38,31 @@ int main() {
 
 	Renderer renderer;
 	Scene scene;
-	Camera camera(800 / 600, 0.1, 100, 50);
+	Camera camera(800.0f / 600.0f, 75, 0.1, 1000);
+	//camera.translateZ(5);
+	//camera.rotateY(0.5);
+
+	//camera.updateMatrix();
+
+	Matrix4 hi = camera.proj * camera.getMatrix();
+
+	double mousePosX;
+	double mousePosY;
+	glfwGetCursorPos(window, &mousePosX, &mousePosY);
+	CameraControls cameraControls(mousePosX, mousePosY);
 
 	BoxGeometry geoB;
 	BasicMaterial matB;
 	auto cubePtrB = std::make_unique<Mesh>(geoB, matB);
 	Mesh& cubeB = *cubePtrB;
 	scene.meshes.push_back(std::move(cubePtrB));
+
+	BoxGeometry geoB2;
+	BasicMaterial matB2;
+	auto cubePtrB2 = std::make_unique<Mesh>(geoB2, matB2);
+	Mesh& cubeB2 = *cubePtrB2;
+	scene.meshes.push_back(std::move(cubePtrB2));
+	cubeB2.translateX(1.5);
 
 	Matrix4 m;
 	m.set(1, 0, 0, 0,
@@ -55,6 +76,8 @@ int main() {
 
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, 1);
+		
+		cameraControls.update(window, camera);
 
 		renderer.render(window, scene, camera);
 	}
