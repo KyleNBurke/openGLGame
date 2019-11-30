@@ -17,7 +17,7 @@ endef
 $(eval $(foreach t,$(src),$(call objFromSrc,$(patsubst %,build/%.o,$(basename $(notdir $(t)))),$(t))))
 
 $(obj): %.o:
-	g++ -c -g -MMD -msse $(incDir) -o $@ $<
+	g++ -c -g -std=c++17 -MMD -msse $(incDir) -o $@ $<
 
 game.exe: $(obj)
 	g++ $(libDir) -o $@ $^ $(libFiles)

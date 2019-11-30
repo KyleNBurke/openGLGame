@@ -11,6 +11,10 @@ Matrix4::Matrix4(const Matrix4& m) {
 	}
 }
 
+Matrix4::Matrix4(const Quaternion& q) {
+	compose(Vector3(0.0f, 0.0f, 0.0f), q, Vector3(1.0f, 1.0f, 1.0f));
+}
+
 Matrix4& Matrix4::identity() {
 	set(1, 0, 0, 0,
 		0, 1, 0, 0,
@@ -23,35 +27,6 @@ Matrix4& Matrix4::identity() {
 Matrix4& Matrix4::compose(const Vector3& position, const Quaternion& quaternion, const Vector3& scale) {
 	float (&te)[16] = elements;
 
-	// float px = position.x, py = position.y, pz = position.z;
-	// float qx = quaternion.x, qy = quaternion.y, qz = quaternion.z, qw = quaternion.w;
-	// float sx = scale.x, sy = scale.y, sz = scale.z;
-
-	// float &t11 = te[0], &t12 = te[4], &t13 = te[8], &t14 = te[12];
-	// float &t21 = te[1], &t22 = te[5], &t23 = te[9], &t24 = te[13];
-	// float &t31 = te[2], &t32 = te[6], &t33 = te[10], &t34 = te[14];
-	// float &t41 = te[3], &t42 = te[7], &t43 = te[11], &t44 = te[15];
-
-	// t11 = (1 - 2 * (qy * qy + qz * qz)) * sx;
-	// t21 = 2 * (qx * qy + qw * qz) * sx;
-	// t31 = -2 * (qw * qy - qx * qz) * sx;
-	// t41 = 0;
-
-	// t12 = 2 * (qx * qy - qw  * qz) * sy;
-	// t22 = (1 - 2 * (qx * qx + qz * qz)) * sy;
-	// t32 = 2 * (qy * qz + qw  * qx) * sy;
-	// t42 = 0;
-
-	// t13 = 2 * (qx * qz + qw * qy) * sz;
-	// t23 = 2 * (qy * qz - qw * qx) * sz;
-	// t33 = (1 - 2 * (qx * qx + qy * qy)) * sz;
-	// t43 = 0;
-
-	// t14 = px;
-	// t24 = py;
-	// t34 = pz;
-	// t44 = 1;
-
 	float x = quaternion.x, y = quaternion.y, z = quaternion.z, w = quaternion.w;
 	float x2 = x + x,	y2 = y + y, z2 = z + z;
 	float xx = x * x2, xy = x * y2, xz = x * z2;
@@ -60,25 +35,25 @@ Matrix4& Matrix4::compose(const Vector3& position, const Quaternion& quaternion,
 
 	float sx = scale.x, sy = scale.y, sz = scale.z;
 
-	te[ 0 ] = ( 1 - ( yy + zz ) ) * sx;
-	te[ 1 ] = ( xy + wz ) * sx;
-	te[ 2 ] = ( xz - wy ) * sx;
-	te[ 3 ] = 0;
+	te[0] = (1 - (yy + zz)) * sx;
+	te[1] = (xy + wz) * sx;
+	te[2] = (xz - wy) * sx;
+	te[3] = 0;
 
-	te[ 4 ] = ( xy - wz ) * sy;
-	te[ 5 ] = ( 1 - ( xx + zz ) ) * sy;
-	te[ 6 ] = ( yz + wx ) * sy;
-	te[ 7 ] = 0;
+	te[4] = (xy - wz) * sy;
+	te[5] = (1 - (xx + zz)) * sy;
+	te[6] = (yz + wx) * sy;
+	te[7] = 0;
 
-	te[ 8 ] = ( xz + wy ) * sz;
-	te[ 9 ] = ( yz - wx ) * sz;
-	te[ 10 ] = ( 1 - ( xx + yy ) ) * sz;
-	te[ 11 ] = 0;
+	te[8] = (xz + wy) * sz;
+	te[9] = (yz - wx) * sz;
+	te[10] = (1 - (xx + yy)) * sz;
+	te[11] = 0;
 
-	te[ 12 ] = position.x;
-	te[ 13 ] = position.y;
-	te[ 14 ] = position.z;
-	te[ 15 ] = 1;
+	te[12] = position.x;
+	te[13] = position.y;
+	te[14] = position.z;
+	te[15] = 1;
 
 	return *this;
 }

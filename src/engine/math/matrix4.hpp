@@ -7,6 +7,7 @@ class Matrix4 {
 	public:
 		Matrix4();
 		Matrix4(const Matrix4& m);
+		Matrix4(const Quaternion& q);
 
 		Matrix4& identity();
 		Matrix4& compose(const Vector3& position, const Quaternion& quaternion, const Vector3& scale);

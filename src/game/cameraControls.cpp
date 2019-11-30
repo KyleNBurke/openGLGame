@@ -1,4 +1,5 @@
 #include "cameraControls.hpp"
+#include "../engine/math/euler.hpp"
 
 #include <iostream>
 
@@ -28,8 +29,12 @@ void CameraControls::update(GLFWwindow* window, Camera& camera) {
 	glfwGetCursorPos(window, &currMousePosX, &currMousePosY);
 
 	//do this: https://github.com/mrdoob/three.js/blob/master/examples/js/controls/PointerLockControls.js
-    camera.rotateY((lastMousePosX - currMousePosX) * rotationSpeed);
-    camera.rotateX((lastMousePosY - currMousePosY) * rotationSpeed);
+    //camera.rotateY((lastMousePosX - currMousePosX) * rotationSpeed);
+    //camera.rotateX((lastMousePosY - currMousePosY) * rotationSpeed);
+	Euler e(camera.quaternion, Euler::Order::yxz);
+	e.y += (lastMousePosX - currMousePosX) * rotationSpeed;
+	e.x += (lastMousePosY - currMousePosY) * rotationSpeed;
+	camera.quaternion = Quaternion(e);
 
 	lastMousePosX = currMousePosX;
 	lastMousePosY = currMousePosY;
