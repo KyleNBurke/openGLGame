@@ -9,7 +9,6 @@
 #include "../engine/materials/basicMaterial.hpp"
 
 #include "cameraControls.hpp"
-#include <glm/gtc/matrix_transform.hpp>
 
 int main() {
 	glfwInit();
@@ -39,12 +38,6 @@ int main() {
 	Renderer renderer;
 	Scene scene;
 	Camera camera(800.0f / 600.0f, 75, 0.1, 1000);
-	//camera.translateZ(5);
-	//camera.rotateY(0.5);
-
-	//camera.updateMatrix();
-
-	Matrix4 hi = camera.proj * camera.getMatrix();
 
 	double mousePosX;
 	double mousePosY;
@@ -63,13 +56,6 @@ int main() {
 	Mesh& cubeB2 = *cubePtrB2;
 	scene.meshes.push_back(std::move(cubePtrB2));
 	cubeB2.translateX(1.5);
-
-	Matrix4 m;
-	m.set(1, 0, 0, 0,
-		  0, 1, 0, 0,
-		  0, 0, 1, 0,
-		  0, 0, 0, 1);
-	cubeB.setMatrix(m);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();

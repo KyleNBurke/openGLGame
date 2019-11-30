@@ -89,7 +89,7 @@ Matrix4& Matrix4::invert() {
 	float det = n11 * t11 + n21 * t12 + n31 * t13 + n41 * t14;
 
 	if (det == 0) {
-		return this->identity();
+		return identity();
 	}
 
 	float detInv = 1 / det;

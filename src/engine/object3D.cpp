@@ -5,10 +5,6 @@
 Object3D::Object3D() :
 	autoUpdateMatrix(true),
 	scale(1, 1, 1)
-	//position(glm::vec3()),
-	//rotation(glm::quat()),
-	//scale(glm::vec3()),
-	//matrix(glm::mat4(1.0f))
 {}
 
 void Object3D::updateMatrix() {

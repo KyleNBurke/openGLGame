@@ -16,7 +16,6 @@ Euler::Euler(const Quaternion& q, Order order) : Euler(Matrix4(q), order) {}
 
 Euler::Euler(const Matrix4& m, Order order) : order(order) {
     // assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
-
     const float* const me = m.getElements();
     const float &m11 = me[0], &m12 = me[4], &m13 = me[8];
 	const float &m21 = me[1], &m22 = me[5], &m23 = me[9];
