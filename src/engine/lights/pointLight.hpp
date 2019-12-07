@@ -1,18 +1,17 @@
 #pragma once
 
 #include "../object3D.hpp"
-#include <glm/glm.hpp>
 #include <glad/glad.h>
 
 class PointLight : public Object3D {
 	public:
-		PointLight(glm::vec3 color = glm::vec3(1.0f));
+		PointLight(Vector3 color = Vector3(1.0f));
 		void update(int offset);
 		static void updateLightCount(int count);
 		
 		static const int maxCount;
 		GLuint getBlock();
-		glm::vec3 color;
+		Vector3 color;
 
 	private:
 		void init();

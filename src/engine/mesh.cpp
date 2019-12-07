@@ -15,17 +15,21 @@ void Mesh::render(const Matrix4& view, const Matrix4& proj, const Vector3& ambie
 		updateMatrix();
 	}
 
+	Matrix4 transformMat = proj * view * matrix;
+
 	//this can be done much more efficient using an enum to get the material type and a switch case (translation matrix should use a UBO)
 	BasicMaterial* basic = dynamic_cast<BasicMaterial*>(&material);
 	if (basic != nullptr) {
-		basic->sendData(proj * view * matrix);
+		basic->sendData(transformMat);
 	}
-	/*LambertMaterial* lambert = dynamic_cast<LambertMaterial*>(&material);
+
+	LambertMaterial* lambert = dynamic_cast<LambertMaterial*>(&material);
 	if (lambert != nullptr) {
-		glm::mat4 transformMat = proj * view * matrix;
-		glm::mat3 normalMat = glm::mat3(glm::transpose(glm::inverse(matrix)));
+		//glm::mat4 transformMat = proj * view * matrix;
+		//glm::mat3 normalMat = glm::mat3(glm::transpose(glm::inverse(matrix)));
+		Matrix3 normalMat = Matrix3(Matrix4(matrix).invert().transpose());
 		lambert->sendData(transformMat, matrix, normalMat, ambientLight);
-	}*/
+	}
 
 	glBindVertexArray(geometry.getVao());
 	glDrawArrays(GL_TRIANGLES, 0, geometry.getVertexCount());

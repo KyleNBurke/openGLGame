@@ -7,6 +7,7 @@
 #include "../engine/camera.hpp"
 #include "../engine/geometries/boxGeometry.hpp"
 #include "../engine/materials/basicMaterial.hpp"
+#include "../engine/materials/lambertMaterial.hpp"
 
 #include "cameraControls.hpp"
 
@@ -51,11 +52,17 @@ int main() {
 	scene.meshes.push_back(std::move(cubePtrB));
 
 	BoxGeometry geoB2;
-	BasicMaterial matB2;
+	LambertMaterial matB2;
 	auto cubePtrB2 = std::make_unique<Mesh>(geoB2, matB2);
 	Mesh& cubeB2 = *cubePtrB2;
 	scene.meshes.push_back(std::move(cubePtrB2));
 	cubeB2.translateX(1.5);
+	cubeB2.translateZ(-3.0f);
+
+	auto pointLightPtr = std::make_unique<PointLight>();
+	pointLightPtr->translateY(3.0f);
+	PointLight& pointLight = *pointLightPtr;
+	scene.addPointLight(std::move(pointLightPtr));
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -64,6 +71,8 @@ int main() {
 			glfwSetWindowShouldClose(window, 1);
 		
 		cameraControls.update(window, camera);
+
+		cubeB2.rotateY(0.1f);
 
 		renderer.render(window, scene, camera);
 	}

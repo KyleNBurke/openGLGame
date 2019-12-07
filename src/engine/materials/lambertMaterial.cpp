@@ -1,5 +1,8 @@
 #include "lambertMaterial.hpp"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 bool LambertMaterial::initialized = false;
 GLuint LambertMaterial::program = 0;
 GLint LambertMaterial::transformLoc = 0;
@@ -8,7 +11,7 @@ GLint LambertMaterial::normalMatrixLoc = 0;
 GLint LambertMaterial::materialColorLoc = 0;
 GLint LambertMaterial::ambientLightLoc = 0;
 
-LambertMaterial::LambertMaterial(glm::vec3 color) :
+LambertMaterial::LambertMaterial(Vector3 color) :
 	color(color)
 {
 	if (!initialized) {
@@ -25,12 +28,16 @@ void LambertMaterial::lambertInit() {
 	ambientLightLoc = glGetUniformLocation(program, "ambientLight");
 }
 
-void LambertMaterial::sendData(const glm::mat4& trans, const glm::mat4& modelMat, const glm::mat3& normMat, const glm::vec3& ambientLight) {
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-	glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, glm::value_ptr(modelMat));
-	glUniformMatrix3fv(normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normMat));
-	glUniform3fv(materialColorLoc, 1, glm::value_ptr(color));
-	glUniform3fv(ambientLightLoc, 1, glm::value_ptr(ambientLight));
+void LambertMaterial::sendData(const Matrix4& transMat, const Matrix4& modelMat, const Matrix3& normMat, const Vector3& ambientLight) {
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, transMat.getElements());
+	glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, modelMat.getElements());
+	glUniformMatrix3fv(normalMatrixLoc, 1, GL_FALSE, normMat.getElements());
+
+	float colorElements[] = {color.x, color.y, color.z};
+	glUniform3fv(materialColorLoc, 1, colorElements);
+
+	float ambientLightElements[] = {ambientLight.x, ambientLight.y, ambientLight.z};
+	glUniform3fv(ambientLightLoc, 1, ambientLightElements);
 }
 
 GLuint LambertMaterial::getProgram() const {
