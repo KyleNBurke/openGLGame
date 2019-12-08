@@ -57,12 +57,13 @@ int main() {
 	Mesh& cubeB2 = *cubePtrB2;
 	scene.meshes.push_back(std::move(cubePtrB2));
 	cubeB2.translateX(1.5);
-	cubeB2.translateZ(-3.0f);
 
 	auto pointLightPtr = std::make_unique<PointLight>();
 	pointLightPtr->translateY(3.0f);
 	PointLight& pointLight = *pointLightPtr;
 	scene.addPointLight(std::move(pointLightPtr));
+	pointLight.translateY(3);
+	pointLight.translateZ(5);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -72,7 +73,7 @@ int main() {
 		
 		cameraControls.update(window, camera);
 
-		cubeB2.rotateY(0.1f);
+		cubeB2.rotateY(0.01f);
 
 		renderer.render(window, scene, camera);
 	}

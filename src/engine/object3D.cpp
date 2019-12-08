@@ -4,7 +4,7 @@
 
 Object3D::Object3D() :
 	autoUpdateMatrix(true),
-	scale(1, 1, 1)
+	scale(1.0f)
 {}
 
 void Object3D::updateMatrix() {

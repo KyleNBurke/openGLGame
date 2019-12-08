@@ -11,12 +11,12 @@ Quaternion::Quaternion(const Quaternion& q) : Quaternion(q.x, q.y, q.z, q.w) {}
 
 Quaternion::Quaternion(const Vector3& axis, float angle) {
 	float halfAngle = angle / 2.0f;
-	float s = sin(halfAngle);
+	float s = sinf(halfAngle);
 
 	x = axis.x * s;
 	y = axis.y * s;
 	z = axis.z * s;
-	w = cos(halfAngle);
+	w = cosf(halfAngle);
 }
 
 Quaternion::Quaternion(const Euler& e) {
@@ -69,7 +69,7 @@ Quaternion::Quaternion(const Euler& e) {
 }
 
 Quaternion& Quaternion::operator*=(const Quaternion& q) {
-	const Quaternion& a(*this);
+	const Quaternion a(*this);
 	const Quaternion& b = q;
 
 	x = a.x * b.w + a.w * b.x + a.y * b.z - a.z * b.y;

@@ -12,7 +12,7 @@ Matrix4::Matrix4(const Matrix4& m) {
 }
 
 Matrix4::Matrix4(const Quaternion& q) {
-	compose(Vector3(0.0f, 0.0f, 0.0f), q, Vector3(1.0f, 1.0f, 1.0f));
+	compose(Vector3(0.0f), q, Vector3(1.0f));
 }
 
 Matrix4& Matrix4::identity() {

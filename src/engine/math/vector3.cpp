@@ -1,7 +1,7 @@
 #include "vector3.hpp"
 #include "quaternion.hpp"
 
-Vector3::Vector3() : Vector3(0, 0, 0) {}
+Vector3::Vector3() : Vector3(0) {}
 
 Vector3::Vector3(float f) : Vector3(f, f, f) {}
 
