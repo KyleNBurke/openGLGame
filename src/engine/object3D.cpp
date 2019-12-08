@@ -2,10 +2,7 @@
 
 #include <iostream>
 
-Object3D::Object3D() :
-	autoUpdateMatrix(true),
-	scale(1.0f)
-{}
+Object3D::Object3D() : autoUpdateMatrix(true), scale(1.0f) {}
 
 void Object3D::updateMatrix() {
 	matrix.compose(position, quaternion, scale);

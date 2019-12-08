@@ -11,9 +11,7 @@ GLint LambertMaterial::normalMatrixLoc = 0;
 GLint LambertMaterial::materialColorLoc = 0;
 GLint LambertMaterial::ambientLightLoc = 0;
 
-LambertMaterial::LambertMaterial(Vector3 color) :
-	color(color)
-{
+LambertMaterial::LambertMaterial(Vector3 color) : color(color) {
 	if (!initialized) {
 		init("lambert", program, transformLoc);
 		lambertInit();

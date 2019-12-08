@@ -3,9 +3,7 @@
 
 Scene::Scene() {}
 
-Scene::Scene(Vector3 ambientLight) :
-	ambientLight(ambientLight)
-{}
+Scene::Scene(Vector3 ambientLight) : ambientLight(ambientLight) {}
 
 const std::vector<std::unique_ptr<PointLight>>& Scene::getPointLights() const {
 	return pointLights;

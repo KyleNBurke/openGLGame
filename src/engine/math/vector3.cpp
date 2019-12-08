@@ -1,17 +1,13 @@
 #include "vector3.hpp"
 #include "quaternion.hpp"
 
-Vector3::Vector3() : Vector3(0) {}
+Vector3::Vector3() : Vector3(0.0f) {}
 
 Vector3::Vector3(float f) : Vector3(f, f, f) {}
 
-Vector3::Vector3(float x, float y, float z) :
-	x(x), y(y), z(z)
-{}
+Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
-Vector3::Vector3(const Vector3& v) :
-	x(v.x), y(v.y), z(v.z)
-{}
+Vector3::Vector3(const Vector3& v) : Vector3(v.x, v.y, v.z) {}
 
 Vector3& Vector3::applyQuaternion(const Quaternion& q) {
 	float ix = q.w * x + q.y * z - q.z * y;

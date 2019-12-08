@@ -4,13 +4,9 @@
 #include <cmath>
 #include <algorithm>
 
-Euler::Euler() :
-    Euler(0, 0, 0)
-{}
+Euler::Euler() : Euler(0.0f, 0.0f, 0.0f) {}
 
-Euler::Euler(float x, float y, float z, Order order) :
-    x(x), y(y), z(z), order(order)
-{}
+Euler::Euler(float x, float y, float z, Order order) :  x(x), y(y), z(z), order(order) {}
 
 Euler::Euler(const Quaternion& q, Order order) : Euler(Matrix4(q), order) {}
 

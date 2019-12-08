@@ -38,7 +38,7 @@ int main() {
 
 	Renderer renderer;
 	Scene scene;
-	Camera camera(800.0f / 600.0f, 75, 0.1, 1000);
+	Camera camera(800.0f / 600.0f, 75.0f, 0.1f, 1000.0f);
 
 	double mousePosX;
 	double mousePosY;
@@ -56,14 +56,14 @@ int main() {
 	auto cubePtrB2 = std::make_unique<Mesh>(geoB2, matB2);
 	Mesh& cubeB2 = *cubePtrB2;
 	scene.meshes.push_back(std::move(cubePtrB2));
-	cubeB2.translateX(1.5);
+	cubeB2.translateX(1.5f);
 
 	auto pointLightPtr = std::make_unique<PointLight>();
 	pointLightPtr->translateY(3.0f);
 	PointLight& pointLight = *pointLightPtr;
 	scene.addPointLight(std::move(pointLightPtr));
-	pointLight.translateY(3);
-	pointLight.translateZ(5);
+	pointLight.translateY(3.0f);
+	pointLight.translateZ(5.0f);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();

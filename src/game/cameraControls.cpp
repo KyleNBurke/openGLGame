@@ -1,8 +1,6 @@
 #include "cameraControls.hpp"
 #include "../engine/math/euler.hpp"
 
-#include <iostream>
-
 CameraControls::CameraControls(double mousePosX, double mousePosY) :
     lastMousePosX(mousePosX),
     lastMousePosY(mousePosY),
