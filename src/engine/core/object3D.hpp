@@ -1,8 +1,8 @@
 #pragma once
 
-#include "math/vector3.hpp"
-#include "math/quaternion.hpp"
-#include "math/matrix4.hpp"
+#include "../math/vector3.hpp"
+#include "../math/quaternion.hpp"
+#include "../math/matrix4.hpp"
 
 class Object3D {
 	public:

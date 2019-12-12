@@ -1,8 +1,5 @@
 #include "lambertMaterial.hpp"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
 bool LambertMaterial::initialized = false;
 GLuint LambertMaterial::program = 0;
 GLint LambertMaterial::transformLoc = 0;

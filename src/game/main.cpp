@@ -2,9 +2,9 @@
 #include <glfw/glfw3.h>
 #include <iostream>
 
-#include "../engine/renderer.hpp"
-#include "../engine/scene.hpp"
-#include "../engine/camera.hpp"
+#include "../engine/core/renderer.hpp"
+#include "../engine/core/scene.hpp"
+#include "../engine/core/camera.hpp"
 #include "../engine/geometries/boxGeometry.hpp"
 #include "../engine/materials/basicMaterial.hpp"
 #include "../engine/materials/lambertMaterial.hpp"

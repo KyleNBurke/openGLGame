@@ -1,7 +1,5 @@
 #include "object3D.hpp"
 
-#include <iostream>
-
 Object3D::Object3D() : autoUpdateMatrix(true), scale(1.0f) {}
 
 void Object3D::updateMatrix() {

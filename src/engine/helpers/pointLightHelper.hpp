@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../mesh.hpp"
+#include "../core/mesh.hpp"
 #include "../lights/pointLight.hpp"
 #include "../geometries/boxGeometry.hpp"
 #include "../materials/basicMaterial.hpp"

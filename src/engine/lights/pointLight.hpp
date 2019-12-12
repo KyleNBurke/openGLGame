@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../object3D.hpp"
+#include "../core/object3D.hpp"
 #include <glad/glad.h>
 
 class PointLight : public Object3D {

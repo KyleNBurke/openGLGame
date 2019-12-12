@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glfw/glfw3.h>
-#include "../engine/camera.hpp"
+#include "../engine/core/camera.hpp"
 
 class CameraControls {
 	public:

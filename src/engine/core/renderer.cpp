@@ -1,6 +1,6 @@
 #include "renderer.hpp"
 #include "mesh.hpp"
-#include "math/matrix4.hpp"
+#include "../math/matrix4.hpp"
 
 Renderer::Renderer() {}
 

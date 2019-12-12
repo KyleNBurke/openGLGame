@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 #include "mesh.hpp"
-#include "lights/pointLight.hpp"
+#include "../lights/pointLight.hpp"
 
 class Scene {
 	public:

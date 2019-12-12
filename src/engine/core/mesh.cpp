@@ -1,8 +1,8 @@
 #include "mesh.hpp"
 #include <glm/gtc/type_ptr.hpp>
-#include "materials/basicMaterial.hpp"
-#include "materials/lambertMaterial.hpp"
-#include "helpers/pointLightHelper.hpp"
+#include "../materials/basicMaterial.hpp"
+#include "../materials/lambertMaterial.hpp"
+#include "../helpers/pointLightHelper.hpp"
 
 Mesh::Mesh(Geometry& geometry, Material& material) : geometry(geometry), material(material) {}
 
